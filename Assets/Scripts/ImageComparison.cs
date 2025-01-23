@@ -5,6 +5,8 @@ public class ImageComparison : MonoBehaviour
 {
     public RawImage rawImage;
     public Image image;
+    public int fixedWidth = 256;
+    public int fixedHeight = 256;
 
     private void Start()
     {
@@ -22,13 +24,14 @@ public class ImageComparison : MonoBehaviour
             return;
         }
 
-        //Texture2D resizedTexture2 = ResizeTexture(texture2, texture1.width, texture1.height);
+        Texture2D resizedTexture1 = ResizeTexture(texture1, fixedWidth, fixedHeight);
+        Texture2D resizedTexture2 = ResizeTexture(texture2, fixedWidth, fixedHeight);
 
-        Color[] pixels1 = texture1.GetPixels();
-        Color[] pixels2 = texture2.GetPixels();
+        Color[] pixels1 = resizedTexture1.GetPixels();
+        Color[] pixels2 = resizedTexture2.GetPixels();
 
-        int width = texture2.width;
-        int height = texture2.height;
+        int width = fixedWidth;
+        int height = fixedHeight;
         float[,] img1 = new float[height, width];
         float[,] img2 = new float[height, width];
 
