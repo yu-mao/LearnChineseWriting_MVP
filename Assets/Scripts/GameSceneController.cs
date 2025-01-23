@@ -2,15 +2,11 @@ using UnityEngine;
 
 public class GameSceneController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private GameObject _tempIndexTipVis;
+    
+    public void WriteAStroke() {}
+    
+    public void ConfirmWriting() {}
+    
+    public void RedoWriting() {}
 }
