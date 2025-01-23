@@ -4272,7 +4272,7 @@ GameObject:
   - component: {fileID: 4312264283657116357}
   - component: {fileID: 3663025207888315959}
   m_Layer: 0
-  m_Name: OVRCameraRig
+  m_Name: OVRCameraRig_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
