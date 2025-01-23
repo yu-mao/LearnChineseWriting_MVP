@@ -1,6 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Rating //Maybe this enum will be in another script to make it globally accesible and not only from this class... by the moment it's here hehe
+{
+    BAD,
+    GOOD,
+    VERY_GOOD
+}
+
 public class LineComparer : MonoBehaviour
 {
     public LayerMask playerLayer;
@@ -10,13 +17,18 @@ public class LineComparer : MonoBehaviour
     public float similarityWeight = 1f;
     public float penaltyWeight = 1f;
 
-    public void EvaluateSimilarity()
+    [Range(0, 100)]
+    public float badThreshold = 33f;
+    [Range(0, 100)]
+    public float goodThreshold = 66f;
+
+    public Rating EvaluateSimilarity() // We want to return an Enum element
     {
         List<Transform> playerSpheres = GetSpheresByLayer(playerLayer);
         List<Transform> sceneSpheres = GetSpheresByLayer(sceneLayer);
         HashSet<Transform> usedSceneSpheres = new HashSet<Transform>();
 
-        if (sceneSpheres.Count == 0) return;
+        if (sceneSpheres.Count == 0) return Rating.BAD;
 
         int matches = 0;
         int penalties = 0;
@@ -53,7 +65,18 @@ public class LineComparer : MonoBehaviour
 
         float finalScore = Mathf.Max(0f, weightedSimilarity - weightedPenalty);
 
-        Debug.Log($"Similitud: {weightedSimilarity}% (Penalizacion: {weightedPenalty}%) - Puntaje final: {finalScore}%");
+        if (finalScore < badThreshold)
+        {
+            return Rating.BAD;
+        }
+        else if (finalScore < goodThreshold)
+        {
+            return Rating.GOOD;
+        }
+        else
+        {
+            return Rating.VERY_GOOD;
+        }
     }
 
     private List<Transform> GetSpheresByLayer(LayerMask layerMask)
