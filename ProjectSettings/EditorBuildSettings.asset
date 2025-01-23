@@ -9,11 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Game.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
-    path: Assets/Scenes/Game_CustomHandPoses_00.unity
+    path: Assets/Scenes/Game_ChineseCharacterSpawner.unity
     guid: 27b164adf91bb47cdb42e31392ff9f27
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Game_CustomHandPoses_00.unity
     guid: df99cf5358aa44949937a69a38787457
+  - enabled: 1
+    path: Assets/Scenes/Game_CustomHandPoses_01.unity
+    guid: 6e9c160d871d04499b1193d57eff4550
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 75dcd7fa06e2b4eb2b752e0a13ada358, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
