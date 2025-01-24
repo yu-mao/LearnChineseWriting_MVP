@@ -32,18 +32,24 @@ public class GameSceneController : MonoBehaviour
         _currentUserWrittenStroke.Clear();
         _tempIndexTipVis.SetActive(false);
     }
-    
-    public void ConfirmWriting() {}
-    
-    public void RedoWriting() {}
+
+    public void ConfirmWriting()
+    {
+        _debugText.text = "Confirm";
+    }
+
+    public void RedoWriting()
+    {
+        _debugText.text = "Redo";
+    }
 
     private void Update()
     {
-        _debugText.text = "isWriting: " + _isWriting + " | strokeCount: " + _currentUserWrittenStroke.Count;
+        _debugText.text = "Is Writing: " + _isWriting;
         if (_isWriting && _hand.IsTracked && _handSkeleton.IsInitialized)
         {
             _currentUserWrittenStroke.Add(GetIndexFingerTipPosition());
-            VisualizeStroke(_currentUserWrittenStroke);
+            VisualizeStroke(_currentUserWrittenStroke.ToArray());
         }
     }
 
@@ -53,11 +59,10 @@ public class GameSceneController : MonoBehaviour
         _tempIndexTipVis.transform.position = indexTip.Transform.position;
         return indexTip.Transform.position;
     }
-    
-    private void VisualizeStroke(List<Vector3> currentUserWrittenStroke)
+
+    private void VisualizeStroke(Vector3[] currentUserWrittenStroke)
     {
-        _strokeVisual.positionCount = 0;
-        _strokeVisual.SetPositions(currentUserWrittenStroke.ToArray());
-        _strokeVisual.positionCount = currentUserWrittenStroke.Count;
+        _strokeVisual.positionCount = currentUserWrittenStroke.Length;
+        _strokeVisual.SetPositions(currentUserWrittenStroke);
     }
 }
