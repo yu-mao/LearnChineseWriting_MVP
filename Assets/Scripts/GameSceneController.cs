@@ -40,6 +40,7 @@ public class GameSceneController : MonoBehaviour
     public void ConfirmWriting()
     {
         EraseUserWrittenStrokes();
+        // TODO: evaluate user writing
         // TODO: randomize writing colour
     }
 
