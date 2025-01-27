@@ -22,7 +22,7 @@ public class GameSceneController : MonoBehaviour
     private List<List<Vector3>> _userWrittenStrokes = new List<List<Vector3>>();
     private List<Vector3> _currentUserWrittenStroke = new List<Vector3>();
     private int _maxCountUserWrittenStrokes;
-    private int _countUserWrittenStrokes;
+    private int _countUserWrittenStrokes = 0;
 
     public void StartWriting()
     {
@@ -39,12 +39,13 @@ public class GameSceneController : MonoBehaviour
 
     public void ConfirmWriting()
     {
+        EraseUserWrittenStrokes();
         // TODO: randomize writing colour
     }
 
     public void RedoWriting()
     {
-        
+        EraseUserWrittenStrokes();
     }
 
     private void Start()
@@ -59,6 +60,8 @@ public class GameSceneController : MonoBehaviour
             if (_isWriting)
             {
                 _currentUserWrittenStroke.Add(GetIndexFingerTipPosition());
+                // _debugText.text = "_currentUserWrittenStroke: " + _currentUserWrittenStroke.Count;
+                
                 UpdateUserWrittenStrokes(_wasWriting);
                 VisualizeCurrentUserWrittenStroke(_currentUserWrittenStroke.ToArray());
             }
@@ -75,6 +78,8 @@ public class GameSceneController : MonoBehaviour
     
     private void UpdateUserWrittenStrokes(bool wasWriting)
     {
+        // _debugText.text = "_currentUserWrittenStroke: " + _currentUserWrittenStroke.Count;
+        
         if (wasWriting && _userWrittenStrokes.Count >= 1)
         {
             // if it's a continuous writing stoke 
@@ -93,12 +98,23 @@ public class GameSceneController : MonoBehaviour
                 _countUserWrittenStrokes = 0;
             }
         }
-        _debugText.text = "_countUserWrittenStrokes: " + _countUserWrittenStrokes;
+        
+        // _debugText.text += "\nand then: " + _currentUserWrittenStroke.Count;
     }
     
     private void VisualizeCurrentUserWrittenStroke(Vector3[] currentUserWrittenStroke)
     {
         _userWritingVisualFeedback.strokes[_countUserWrittenStrokes].positionCount = currentUserWrittenStroke.Length;
         _userWritingVisualFeedback.strokes[_countUserWrittenStrokes].SetPositions(currentUserWrittenStroke);
+    }
+
+    private void EraseUserWrittenStrokes()
+    {
+        _userWrittenStrokes.Clear();
+
+        foreach (var lineRenderer in _userWritingVisualFeedback.strokes)
+        {
+            lineRenderer.positionCount = 0;
+        }
     }
 }
