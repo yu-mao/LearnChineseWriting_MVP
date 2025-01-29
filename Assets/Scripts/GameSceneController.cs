@@ -1,13 +1,10 @@
-using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 
 public class GameSceneController : MonoBehaviour
 {
     // [Header("Temporary")]
-    // [SerializeField] private GameObject _tempIndexTipVis;
     [SerializeField] private TextMeshProUGUI _debugText;
 
     [Header("Hand Setup")]
@@ -26,12 +23,13 @@ public class GameSceneController : MonoBehaviour
     private List<Vector3> _currentUserWrittenStroke = new List<Vector3>();
     private int _maxCountUserWrittenStrokes;
     private int _countUserWrittenStrokes = 0;
-
+    private List<string> _sampleCharacters = new List<string> { "ai", "zhong", "wen" };
+    private int _sampleCharacterIndex = 0;
+    
     public void StartWriting()
     {
         _isWriting = true;
         _debugText.text = "isWriting";
-        // _tempIndexTipVis.SetActive(true);
     }
 
     public void EndWriting()
@@ -39,13 +37,13 @@ public class GameSceneController : MonoBehaviour
         _isWriting = false;
         _debugText.text = "";
         _currentUserWrittenStroke.Clear();
-        // _tempIndexTipVis.SetActive(false);
     }
 
     public void ConfirmWriting()
     {
         EraseUserWrittenStrokes();
-        _currentSampleCharacter.UpdateCurrentSampleCharacter("zhong");
+        UpdateCurrentSampleCharacter();
+        
         // TODO: evaluate user writing
         // TODO: randomize writing colour
     }
@@ -58,6 +56,7 @@ public class GameSceneController : MonoBehaviour
     private void Awake()
     {
         _maxCountUserWrittenStrokes = _userWritingVisualFeedback.strokes.Count;
+        UpdateCurrentSampleCharacter();
     }
 
     private void Update()
@@ -67,7 +66,6 @@ public class GameSceneController : MonoBehaviour
             if (_isWriting)
             {
                 _currentUserWrittenStroke.Add(GetIndexFingerTipPosition());
-                // _debugText.text = "_currentUserWrittenStroke: " + _currentUserWrittenStroke.Count;
                 
                 UpdateUserWrittenStrokes(_wasWriting);
                 VisualizeCurrentUserWrittenStroke(_currentUserWrittenStroke.ToArray());
@@ -76,10 +74,17 @@ public class GameSceneController : MonoBehaviour
         _wasWriting = _isWriting;
     }
 
+    private void UpdateCurrentSampleCharacter()
+    {
+        if (_sampleCharacterIndex >= _sampleCharacters.Count) _sampleCharacterIndex = 0;
+        
+        _currentSampleCharacter.UpdateCurrentSampleCharacter(_sampleCharacters[_sampleCharacterIndex]);
+        _sampleCharacterIndex++;
+    }
+
     private Vector3 GetIndexFingerTipPosition()
     {
         var indexTip = _handSkeleton.Bones[(int)OVRSkeleton.BoneId.XRHand_IndexTip];
-        // _tempIndexTipVis.transform.position = indexTip.Transform.position;
         return indexTip.Transform.position;
     }
     
