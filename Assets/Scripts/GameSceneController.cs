@@ -29,13 +29,11 @@ public class GameSceneController : MonoBehaviour
     public void StartWriting()
     {
         _isWriting = true;
-        _debugText.text = "isWriting";
     }
 
     public void EndWriting()
     {
         _isWriting = false;
-        _debugText.text = "";
         _currentUserWrittenStroke.Clear();
     }
 
@@ -53,7 +51,7 @@ public class GameSceneController : MonoBehaviour
         EraseUserWrittenStrokes();
     }
 
-    private void Awake()
+    private void Start()
     {
         _maxCountUserWrittenStrokes = _userWritingVisualFeedback.strokes.Count;
         UpdateCurrentSampleCharacter();
@@ -119,6 +117,7 @@ public class GameSceneController : MonoBehaviour
     private void EraseUserWrittenStrokes()
     {
         _userWrittenStrokes.Clear();
+        _countUserWrittenStrokes = 0;
 
         foreach (var lineRenderer in _userWritingVisualFeedback.strokes)
         {
