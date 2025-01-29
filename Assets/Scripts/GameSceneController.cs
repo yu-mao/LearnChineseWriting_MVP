@@ -78,13 +78,11 @@ public class GameSceneController : MonoBehaviour
     }
     
     private void UpdateUserWrittenStrokes(bool wasWriting)
-    {
-        // _debugText.text = "_currentUserWrittenStroke: " + _currentUserWrittenStroke.Count;
-        
+    {        
         if (wasWriting && _userWrittenStrokes.Count >= 1)
         {
             // if it's a continuous writing stoke 
-            _userWrittenStrokes[_countUserWrittenStrokes] = _currentUserWrittenStroke;
+            _userWrittenStrokes[_countUserWrittenStrokes - 1] = _currentUserWrittenStroke;
         }
         else
         {
@@ -99,8 +97,6 @@ public class GameSceneController : MonoBehaviour
                 _countUserWrittenStrokes = 0;
             }
         }
-        
-        // _debugText.text += "\nand then: " + _currentUserWrittenStroke.Count;
     }
     
     private void VisualizeCurrentUserWrittenStroke(Vector3[] currentUserWrittenStroke)
