@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Game.unity
-    guid: 474d9d7c915f94cc3b5a77dc6e7565b5
-  - enabled: 0
     path: Assets/Scenes/Game_ChineseCharacterSpawner.unity
     guid: 27b164adf91bb47cdb42e31392ff9f27
   - enabled: 0
@@ -18,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Game_IndexFingerWriting.unity
     guid: d557133d6da29464fa4e42a28095547d
   - enabled: 1
-    path: Assets/Scenes/Game_spawnChineseCharacters.unity
+    path: Assets/Scenes/Game.unity
     guid: 0a0319e5bce6d4cc0875394d9ce67688
   - enabled: 0
     path: Assets/Scenes/Game_integration_00.unity
