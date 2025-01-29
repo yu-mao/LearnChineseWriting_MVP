@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameSceneController : MonoBehaviour
 {
     // [Header("Temporary")]
-    [SerializeField] private TextMeshProUGUI _debugText;
+    // [SerializeField] private TextMeshProUGUI _debugText;
 
     [Header("Hand Setup")]
     [SerializeField] private OVRHand _hand;

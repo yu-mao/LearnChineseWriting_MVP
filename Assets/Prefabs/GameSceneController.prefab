@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf45ca2a87994d71bb1de609ee000a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debugText: {fileID: 0}
   _hand: {fileID: 0}
   _handSkeleton: {fileID: 0}
   _currentSampleCharacter: {fileID: 0}
