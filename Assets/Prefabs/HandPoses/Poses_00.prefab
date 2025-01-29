@@ -152,6 +152,10 @@ PrefabInstance:
       propertyPath: _hand
       value: 
       objectReference: {fileID: 1861827290259595623}
+    - target: {fileID: 4560130362396090879, guid: 48779c4e9105c1d4c986f52958bba9a3, type: 3}
+      propertyPath: _activeStates.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7287027143344386917, guid: 48779c4e9105c1d4c986f52958bba9a3, type: 3}
       propertyPath: _hand
       value: 

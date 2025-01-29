@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameSceneController : MonoBehaviour
 {
     // [Header("Temporary")]
-    // [SerializeField] private TextMeshProUGUI _debugText;
+    [SerializeField] private TextMeshProUGUI _debugText;
 
     [Header("Hand Setup")]
     [SerializeField] private OVRHand _hand;
@@ -29,12 +29,14 @@ public class GameSceneController : MonoBehaviour
     public void StartWriting()
     {
         _isWriting = true;
+        _debugText.text = "isWriting";
     }
 
     public void EndWriting()
     {
         _isWriting = false;
         _currentUserWrittenStroke.Clear();
+        _debugText.text = "";
     }
 
     public void ConfirmWriting()
@@ -49,6 +51,7 @@ public class GameSceneController : MonoBehaviour
     public void RedoWriting()
     {
         EraseUserWrittenStrokes();
+        _debugText.text = "RedoWriting";
     }
 
     private void Start()
