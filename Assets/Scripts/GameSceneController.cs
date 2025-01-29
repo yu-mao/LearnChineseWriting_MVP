@@ -13,6 +13,9 @@ public class GameSceneController : MonoBehaviour
     [Header("Hand Setup")]
     [SerializeField] private OVRHand _hand;
     [SerializeField] private OVRSkeleton _handSkeleton;
+    
+    [Header("Sample Characters")]
+    [SerializeField] private CurrentSampleChineseCharacter _currentSampleCharacter;
 
     [Header("Visual Feedback")]
     [SerializeField] private UserWritingVisualFeedback _userWritingVisualFeedback;
@@ -27,12 +30,14 @@ public class GameSceneController : MonoBehaviour
     public void StartWriting()
     {
         _isWriting = true;
+        _debugText.text = "isWriting";
         // _tempIndexTipVis.SetActive(true);
     }
 
     public void EndWriting()
     {
         _isWriting = false;
+        _debugText.text = "";
         _currentUserWrittenStroke.Clear();
         // _tempIndexTipVis.SetActive(false);
     }
@@ -40,6 +45,7 @@ public class GameSceneController : MonoBehaviour
     public void ConfirmWriting()
     {
         EraseUserWrittenStrokes();
+        _currentSampleCharacter.UpdateCurrentSampleCharacter("zhong");
         // TODO: evaluate user writing
         // TODO: randomize writing colour
     }
@@ -49,7 +55,7 @@ public class GameSceneController : MonoBehaviour
         EraseUserWrittenStrokes();
     }
 
-    private void Start()
+    private void Awake()
     {
         _maxCountUserWrittenStrokes = _userWritingVisualFeedback.strokes.Count;
     }

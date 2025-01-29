@@ -1,16 +1,22 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CurrentSampleChineseCharacter : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private List<Material> _sampleChineseCharacters;
+    
+    private MeshRenderer _meshRenderer;
+
+    public void UpdateCurrentSampleCharacter(string pronounciation)
     {
-        
+        Material currentCharacter = _sampleChineseCharacters.Where(
+            i => i.name.Contains(pronounciation)).FirstOrDefault();
+        _meshRenderer.material = currentCharacter;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        _meshRenderer = GetComponent<MeshRenderer>();
     }
 }

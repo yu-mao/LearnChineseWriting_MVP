@@ -99,3 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c427601065a541fd9e31572f90a91fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sampleChineseCharacters:
+  - {fileID: 2100000, guid: 71b027e43b28740c8852716c52d2ec7b, type: 2}
+  - {fileID: 2100000, guid: d009808aabb2e45f08d4499705051de4, type: 2}
+  - {fileID: 2100000, guid: adf47c65b56054b708e6428dea499f8b, type: 2}
