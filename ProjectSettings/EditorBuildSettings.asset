@@ -6,25 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Game_ChineseCharacterSpawner.unity
-    guid: 27b164adf91bb47cdb42e31392ff9f27
-  - enabled: 0
-    path: Assets/Scenes/Game_CustomHandPoses_00.unity
-    guid: 6e9c160d871d04499b1193d57eff4550
-  - enabled: 0
-    path: Assets/Scenes/Game_IndexFingerWriting.unity
-    guid: d557133d6da29464fa4e42a28095547d
-  - enabled: 0
-    path: Assets/Scenes/Game.unity
-    guid: 0a0319e5bce6d4cc0875394d9ce67688
-  - enabled: 0
-    path: Assets/Scenes/Game_integration_00.unity
-    guid: 0d75d1521158049388e8c8369df8684f
-  - enabled: 0
     path: Assets/Scenes/Game_interactionFlow.unity
     guid: 98c8bb328ed4148df98e973202fe4bb8
   - enabled: 1
-    path: Assets/Scenes/Game_UX_UI.unity
+    path: Assets/Scenes/Game.unity
     guid: a770ad32a3e784341ac0ddc7647db1b4
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 75dcd7fa06e2b4eb2b752e0a13ada358, type: 2}
