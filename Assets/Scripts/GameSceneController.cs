@@ -13,6 +13,9 @@ public class GameSceneController : MonoBehaviour
     [Header("Hand Setup")]
     [SerializeField] private OVRHand _hand;
     [SerializeField] private OVRSkeleton _handSkeleton;
+    
+    [Header("Sample Characters")]
+    [SerializeField] private CurrentSampleChineseCharacter _currentSampleCharacter;
 
     [Header("Visual Feedback")]
     [SerializeField] private UserWritingVisualFeedback _userWritingVisualFeedback;
@@ -27,12 +30,14 @@ public class GameSceneController : MonoBehaviour
     public void StartWriting()
     {
         _isWriting = true;
+        _debugText.text = "isWriting";
         // _tempIndexTipVis.SetActive(true);
     }
 
     public void EndWriting()
     {
         _isWriting = false;
+        _debugText.text = "";
         _currentUserWrittenStroke.Clear();
         // _tempIndexTipVis.SetActive(false);
     }
@@ -40,6 +45,7 @@ public class GameSceneController : MonoBehaviour
     public void ConfirmWriting()
     {
         EraseUserWrittenStrokes();
+        _currentSampleCharacter.UpdateCurrentSampleCharacter("zhong");
         // TODO: evaluate user writing
         // TODO: randomize writing colour
     }
@@ -49,7 +55,7 @@ public class GameSceneController : MonoBehaviour
         EraseUserWrittenStrokes();
     }
 
-    private void Start()
+    private void Awake()
     {
         _maxCountUserWrittenStrokes = _userWritingVisualFeedback.strokes.Count;
     }
@@ -78,13 +84,11 @@ public class GameSceneController : MonoBehaviour
     }
     
     private void UpdateUserWrittenStrokes(bool wasWriting)
-    {
-        // _debugText.text = "_currentUserWrittenStroke: " + _currentUserWrittenStroke.Count;
-        
+    {        
         if (wasWriting && _userWrittenStrokes.Count >= 1)
         {
             // if it's a continuous writing stoke 
-            _userWrittenStrokes[_countUserWrittenStrokes] = _currentUserWrittenStroke;
+            _userWrittenStrokes[_countUserWrittenStrokes - 1] = _currentUserWrittenStroke;
         }
         else
         {
@@ -99,8 +103,6 @@ public class GameSceneController : MonoBehaviour
                 _countUserWrittenStrokes = 0;
             }
         }
-        
-        // _debugText.text += "\nand then: " + _currentUserWrittenStroke.Count;
     }
     
     private void VisualizeCurrentUserWrittenStroke(Vector3[] currentUserWrittenStroke)
