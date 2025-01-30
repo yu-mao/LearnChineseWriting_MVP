@@ -1200,6 +1200,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1000751570149834801, guid: a60822bf8e81043fb8587a0cf1a267ae, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.00078
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000751570149834801, guid: a60822bf8e81043fb8587a0cf1a267ae, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00021
+      objectReference: {fileID: 0}
     - target: {fileID: 7169124397505624178, guid: a60822bf8e81043fb8587a0cf1a267ae, type: 3}
       propertyPath: m_Name
       value: UserWritingVisualFeedback_new

@@ -14,9 +14,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Game_CustomHandPoses_00.unity
     guid: 6e9c160d871d04499b1193d57eff4550
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Game_IndexFingerWriting.unity
     guid: d74c0c00dff894a8d90b7837ff25e872
+  - enabled: 1
+    path: Assets/Scenes/Jesus/UserWritingEvaluation.unity
+    guid: 439dfe0d7ee3eb34bb0742addb50234b
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 75dcd7fa06e2b4eb2b752e0a13ada358, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

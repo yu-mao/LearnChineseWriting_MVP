@@ -1,66 +1,160 @@
+using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ImageComparison : MonoBehaviour
 {
-    public RawImage rawImage;
-    public Image image;
-    public int fixedWidth = 256;
-    public int fixedHeight = 256;
+    public static ImageComparison instance;
 
-    private void Start()
+    [Tooltip("Base chinese word image")] public Image image;
+    [Tooltip("Drawing to compare")] public RawImage rawImage;
+
+    [SerializeField] private int fixedWidth = 256;
+    [SerializeField] private int fixedHeight = 256;
+
+    //[SerializeField] private Califitation califitation;
+
+    [SerializeField, Range(0, 100)] public float thresholdVeryGood;
+    [SerializeField, Range(0, 100)] public float thresholdGood;
+    [SerializeField, Range(0, 1)] public float grayscaleTolerance = 0.05f;
+    [SerializeField, Range(0, 1)] public float ignoreBlankSpacesThreshold = 0.95f;
+
+    private void Awake()
     {
-        CompareImages();
+        instance = this;
     }
 
-    public void CompareImages()
+        /*private void Awake()
+        {
+            if (instance != null && instance != this)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+        }*/
+
+        /*private void StartFunction()
+        {
+            califitation = CompareImages();
+            calificationGUI.text = califitation.ToString();
+            Debug.Log($"Calificación obtenida: {califitation}");
+        }*/
+
+    public void SetImageToCompare(Image imagen)
     {
-        Texture2D texture1 = (Texture2D)rawImage.texture;
+        image = imagen;
+    }
+
+    public void SetRawImageToCompare(RawImage rawImagen)
+    {
+        rawImage = rawImagen;
+    }
+
+    public Califitation CompareImages()
+    {
+        if (image == null || rawImage == null)
+        {
+            return Califitation.None;
+        }
+
+        Texture2D texture1;
+
+        if (rawImage.texture is RenderTexture renderTexture)
+        {
+            texture1 = ConvertRenderTextureToTexture2D(renderTexture);
+        }
+        else if (rawImage.texture is Texture2D tex2D)
+        {
+            texture1 = tex2D;
+        }
+        else
+        {
+            return Califitation.None;
+        }
+
         Texture2D texture2 = image.sprite.texture;
 
         if (!texture1.isReadable || !texture2.isReadable)
         {
-            Debug.LogError("Error in readable Texture");
-            return;
+            return Califitation.None;
         }
 
         Texture2D resizedTexture1 = ResizeTexture(texture1, fixedWidth, fixedHeight);
         Texture2D resizedTexture2 = ResizeTexture(texture2, fixedWidth, fixedHeight);
+
+        //SaveGrayscaleData(resizedTexture1, "/debug_texture1_grayscale.txt");
+        //SaveGrayscaleData(resizedTexture2, "/debug_texture2_grayscale.txt");
 
         Color[] pixels1 = resizedTexture1.GetPixels();
         Color[] pixels2 = resizedTexture2.GetPixels();
 
         int width = fixedWidth;
         int height = fixedHeight;
-        float[,] img1 = new float[height, width];
-        float[,] img2 = new float[height, width];
+        int correctPixels = 0;
+        int incorrectPixels = 0;
+        int totalRelevantPixels = 0;
 
-        for (int y = 0; y < height; y++)
+        for (int i = 0; i < pixels1.Length; i++)
         {
-            for (int x = 0; x < width; x++)
+            float gray1 = pixels1[i].grayscale;
+            float gray2 = pixels2[i].grayscale;
+
+            if (gray1 > ignoreBlankSpacesThreshold || gray2 > ignoreBlankSpacesThreshold)
             {
-                img1[y, x] = pixels1[y * width + x].grayscale;
-                img2[y, x] = pixels2[y * width + x].grayscale;
+                continue;
+            }
+
+            totalRelevantPixels++;
+
+            if (gray2 < grayscaleTolerance && gray1 < grayscaleTolerance)
+            {
+                correctPixels++;
+            }
+            else if (gray2 > grayscaleTolerance && gray1 < grayscaleTolerance)
+            {
+                incorrectPixels++;
             }
         }
 
-        int diffPixels = 0;
-        for (int y = 0; y < height; y++)
+        if (totalRelevantPixels == 0)
         {
-            for (int x = 0; x < width; x++)
-            {
-                if (Mathf.Abs(img1[y, x] - img2[y, x]) > 0)
-                {
-                    diffPixels++;
-                }
-            }
+            return Califitation.BAD;
         }
 
-        float totalPixels = width * height;
-        float percentageDifference = (float)diffPixels / totalPixels * 100;
-        float percentageSimilarity = 100 - percentageDifference;
+        float percentageCorrect = (correctPixels / (float)totalRelevantPixels) * 100;
+        float percentageIncorrect = (incorrectPixels / (float)totalRelevantPixels) * 100;
 
-        Debug.Log($"Porcentaje de similitud: {percentageSimilarity}%");
+        float percentageSimilarity = percentageCorrect - percentageIncorrect;
+
+        Debug.Log($"Percentage of similarity: {percentageSimilarity}%");
+
+        image = null;
+        rawImage.texture = null;
+        rawImage = null;
+
+        if (percentageSimilarity >= thresholdVeryGood)
+            return Califitation.VERY_GOOD;
+        else if (percentageSimilarity >= thresholdGood)
+            return Califitation.GOOD;
+        else
+            return Califitation.BAD;
+    }
+
+    private Texture2D ConvertRenderTextureToTexture2D(RenderTexture renderTexture)
+    {
+        Texture2D texture = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGBA32, false);
+        RenderTexture.active = renderTexture;
+        texture.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+        texture.Apply();
+
+        RenderTexture.active = null;
+        return texture;
     }
 
     private Texture2D ResizeTexture(Texture2D originalTexture, int targetWidth, int targetHeight)
@@ -79,4 +173,30 @@ public class ImageComparison : MonoBehaviour
 
         return resizedTexture;
     }
+
+    private void SaveGrayscaleData(Texture2D texture, string filename) //this function is only for grayscale comparison and verification in pc
+    {
+        string filePath = Application.persistentDataPath + filename;
+        System.IO.StreamWriter writer = new System.IO.StreamWriter(filePath);
+
+        Color[] pixels = texture.GetPixels();
+
+        foreach (var pixel in pixels)
+        {
+            float grayScale = pixel.grayscale;
+            writer.WriteLine(grayScale);
+        }
+
+        writer.Close();
+        Debug.Log("Escalas de grises guardadas en: " + filePath);
+    }
+}
+
+[Serializable]
+public enum Califitation
+{
+    None,
+    BAD,
+    GOOD,
+    VERY_GOOD
 }
