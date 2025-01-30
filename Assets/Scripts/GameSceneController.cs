@@ -20,6 +20,7 @@ public class GameSceneController : MonoBehaviour
 
     [Header("Visual Feedback")]
     [SerializeField] private UserWritingVisualFeedback _userWritingVisualFeedback;
+    [SerializeField] private GameObject _pen;
 
     [Header("User Writing Evaluation")]
     [SerializeField] private EvaluationUIController _evaluationUI;
@@ -48,12 +49,14 @@ public class GameSceneController : MonoBehaviour
     public void StartWriting()
     {
         _isWriting = true;
+        _pen.SetActive(true);
     }
 
     public void EndWriting()
     {
         _isWriting = false;
         _currentUserWrittenStroke.Clear();
+        _pen.SetActive(false);
     }
 
     public void ConfirmWriting()
@@ -74,6 +77,7 @@ public class GameSceneController : MonoBehaviour
     {
         _maxCountUserWrittenStrokes = _userWritingVisualFeedback.strokes.Count;
         _currentSampleCharacter.gameObject.SetActive(false);
+        _pen.SetActive(false);
     }
 
     private void Update()
@@ -82,7 +86,9 @@ public class GameSceneController : MonoBehaviour
         {
             if (_isWriting)
             {
-                _currentUserWrittenStroke.Add(GetIndexFingerTipPosition());
+                Vector3 indexFingerTipPos = GetIndexFingerTipPosition();
+                _currentUserWrittenStroke.Add(indexFingerTipPos);
+                _pen.transform.position = indexFingerTipPos;
                 
                 UpdateUserWrittenStrokes(_wasWriting);
                 VisualizeCurrentUserWrittenStroke(_currentUserWrittenStroke.ToArray());
