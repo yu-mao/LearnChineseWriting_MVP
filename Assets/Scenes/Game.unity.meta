@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: b17284249006e41a6b0659641beeb186
+<<<<<<<< HEAD:Assets/Scenes/Game_UX_UI.unity.meta
+guid: a770ad32a3e784341ac0ddc7647db1b4
+========
+guid: d74c0c00dff894a8d90b7837ff25e872
+>>>>>>>> 83373d8d4cb7ca4418440f5098c50702a8c110e7:Assets/Scenes/Game_IndexFingerWriting.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
