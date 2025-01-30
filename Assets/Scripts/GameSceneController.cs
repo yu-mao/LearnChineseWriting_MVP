@@ -19,6 +19,9 @@ public class GameSceneController : MonoBehaviour
     [Header("Visual Feedback")]
     [SerializeField] private UserWritingVisualFeedback _userWritingVisualFeedback;
 
+    [Header("User Writing Evaluation")]
+    [SerializeField] private EvaluationUIController _evaluationUI;
+
     private bool _isWriting = false;
     private bool _wasWriting = false;
     private List<List<Vector3>> _userWrittenStrokes = new List<List<Vector3>>();
@@ -55,7 +58,8 @@ public class GameSceneController : MonoBehaviour
     {
         EraseUserWrittenStrokes();
         UpdateCurrentSampleCharacter();
-        
+        EvaluateUserWriting();
+
         // TODO: evaluate user writing
         // TODO: randomize writing colour
     }
@@ -139,5 +143,12 @@ public class GameSceneController : MonoBehaviour
         {
             lineRenderer.positionCount = 0;
         }
+    }
+
+    private void EvaluateUserWriting()
+    {
+        // trigger Jesus' user writing evaluation back-end
+        
+        _evaluationUI.ShowEvaluationUI();
     }
 }
