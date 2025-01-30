@@ -364,6 +364,10 @@ PrefabInstance:
       propertyPath: _fingerFeatureStateProvider
       value: 
       objectReference: {fileID: 683000675}
+    - target: {fileID: 308899108525597483, guid: a86c8a2980bd94ff299baf5bf9f984b9, type: 3}
+      propertyPath: _activeStates.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 308899108525597485, guid: a86c8a2980bd94ff299baf5bf9f984b9, type: 3}
       propertyPath: _transformFeatureStateProvider
       value: 
@@ -424,10 +428,18 @@ PrefabInstance:
       propertyPath: _transformFeatureStateProvider
       value: 
       objectReference: {fileID: 683000676}
+    - target: {fileID: 2816164679260662604, guid: a86c8a2980bd94ff299baf5bf9f984b9, type: 3}
+      propertyPath: m_Name
+      value: Confirm
+      objectReference: {fileID: 0}
     - target: {fileID: 2816164679260662605, guid: a86c8a2980bd94ff299baf5bf9f984b9, type: 3}
       propertyPath: _fingerFeatureStateProvider
       value: 
       objectReference: {fileID: 683000675}
+    - target: {fileID: 3264750806306050312, guid: a86c8a2980bd94ff299baf5bf9f984b9, type: 3}
+      propertyPath: m_Name
+      value: Redo
+      objectReference: {fileID: 0}
     - target: {fileID: 3264750806306050313, guid: a86c8a2980bd94ff299baf5bf9f984b9, type: 3}
       propertyPath: _fingerFeatureStateProvider
       value: 
@@ -440,10 +452,18 @@ PrefabInstance:
       propertyPath: _fingerFeatureStateProvider
       value: 
       objectReference: {fileID: 683000675}
+    - target: {fileID: 3264750807089509523, guid: a86c8a2980bd94ff299baf5bf9f984b9, type: 3}
+      propertyPath: m_Name
+      value: Redo
+      objectReference: {fileID: 0}
     - target: {fileID: 3264750807089509527, guid: a86c8a2980bd94ff299baf5bf9f984b9, type: 3}
       propertyPath: _transformFeatureStateProvider
       value: 
       objectReference: {fileID: 683000676}
+    - target: {fileID: 3635211442482955434, guid: a86c8a2980bd94ff299baf5bf9f984b9, type: 3}
+      propertyPath: m_Name
+      value: Confirm
+      objectReference: {fileID: 0}
     - target: {fileID: 3635211442482955435, guid: a86c8a2980bd94ff299baf5bf9f984b9, type: 3}
       propertyPath: _fingerFeatureStateProvider
       value: 
