@@ -31,11 +31,13 @@ public class GameSceneController : MonoBehaviour
     public void ActivateWriting()
     {
         isWritingActivated = true;
+        _currentSampleCharacter.gameObject.SetActive(true);
     }
 
     public void DeactivateWriting()
     {
         isWritingActivated = false;
+        _currentSampleCharacter.gameObject.SetActive(false);
     }
     
     public void StartWriting()
@@ -66,7 +68,7 @@ public class GameSceneController : MonoBehaviour
     private void Start()
     {
         _maxCountUserWrittenStrokes = _userWritingVisualFeedback.strokes.Count;
-        UpdateCurrentSampleCharacter();
+        _currentSampleCharacter.gameObject.SetActive(false);
     }
 
     private void Update()
