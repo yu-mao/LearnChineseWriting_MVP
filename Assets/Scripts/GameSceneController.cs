@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 public class GameSceneController : MonoBehaviour
 {
@@ -56,11 +58,10 @@ public class GameSceneController : MonoBehaviour
 
     public void ConfirmWriting()
     {
-        EraseUserWrittenStrokes();
-        UpdateCurrentSampleCharacter();
-        EvaluateUserWriting();
+        if (!isWritingActivated) return;
 
-        // TODO: evaluate user writing
+        StartCoroutine(AsyncConfirmWriting());
+
         // TODO: randomize writing colour
     }
 
@@ -89,15 +90,33 @@ public class GameSceneController : MonoBehaviour
         }
         _wasWriting = _isWriting;
     }
+    
+    private IEnumerator AsyncConfirmWriting()
+    {
+        EraseUserWrittenStrokes();
+        
+        // display evaluation UI
+        if (_currentSampleCharacter.gameObject.activeSelf)
+        {
+            _currentSampleCharacter.gameObject.SetActive(false);
+            
+            _evaluationUI.ShowEvaluationUI();
+            yield return new WaitForSeconds(3f);
+            _evaluationUI.HideAllEvaluationUIs();
+        }
+        
+        // display next sample Chinese character
+        UpdateCurrentSampleCharacter();
+        _currentSampleCharacter.gameObject.SetActive(true);
+        yield return _currentSampleCharacter.gameObject.transform.DOShakePosition(0.5f, 0.5f, 15)
+            .SetEase(Ease.InOutQuad).WaitForCompletion();
+    }
 
     private void UpdateCurrentSampleCharacter()
     {
-        if (!isWritingActivated) return;
-        
-        if (_sampleCharacterIndex >= _sampleCharacters.Count) _sampleCharacterIndex = 0;
-        
         _currentSampleCharacter.UpdateCurrentSampleCharacter(_sampleCharacters[_sampleCharacterIndex]);
         _sampleCharacterIndex++;
+        if (_sampleCharacterIndex >= _sampleCharacters.Count) _sampleCharacterIndex = 0;
     }
 
     private Vector3 GetIndexFingerTipPosition()
@@ -143,12 +162,5 @@ public class GameSceneController : MonoBehaviour
         {
             lineRenderer.positionCount = 0;
         }
-    }
-
-    private void EvaluateUserWriting()
-    {
-        // trigger Jesus' user writing evaluation back-end
-        
-        _evaluationUI.ShowEvaluationUI();
     }
 }
