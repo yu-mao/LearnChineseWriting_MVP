@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GameSceneController : MonoBehaviour
 {
-    // [Header("Temporary")]
+    public bool isWritingActivated = false;
+    
+    [Header("Temporary")]
     [SerializeField] private TextMeshProUGUI _debugText;
 
     [Header("Hand Setup")]
@@ -25,18 +27,26 @@ public class GameSceneController : MonoBehaviour
     private int _countUserWrittenStrokes = 0;
     private List<string> _sampleCharacters = new List<string> { "ai", "zhong", "wen" };
     private int _sampleCharacterIndex = 0;
+
+    public void ActivateWriting()
+    {
+        isWritingActivated = true;
+    }
+
+    public void DeactivateWriting()
+    {
+        isWritingActivated = false;
+    }
     
     public void StartWriting()
     {
         _isWriting = true;
-        _debugText.text = "isWriting";
     }
 
     public void EndWriting()
     {
         _isWriting = false;
         _currentUserWrittenStroke.Clear();
-        _debugText.text = "";
     }
 
     public void ConfirmWriting()
@@ -51,7 +61,6 @@ public class GameSceneController : MonoBehaviour
     public void RedoWriting()
     {
         EraseUserWrittenStrokes();
-        _debugText.text = "RedoWriting";
     }
 
     private void Start()
@@ -62,7 +71,7 @@ public class GameSceneController : MonoBehaviour
 
     private void Update()
     {
-        if (_hand.IsTracked && _handSkeleton.IsInitialized)
+        if (_hand.IsTracked && _handSkeleton.IsInitialized && isWritingActivated)
         {
             if (_isWriting)
             {
@@ -77,6 +86,8 @@ public class GameSceneController : MonoBehaviour
 
     private void UpdateCurrentSampleCharacter()
     {
+        if (!isWritingActivated) return;
+        
         if (_sampleCharacterIndex >= _sampleCharacters.Count) _sampleCharacterIndex = 0;
         
         _currentSampleCharacter.UpdateCurrentSampleCharacter(_sampleCharacters[_sampleCharacterIndex]);

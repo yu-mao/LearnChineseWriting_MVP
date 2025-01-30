@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Learning Chinese Writing
+  m_text: Learn Chinese Writing
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -503,7 +503,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: WELCOME
+  m_text: WELCOME TO
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -608,7 +608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 263420438786566225, guid: 24b143f6b932d3241a6559da51aa7980, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 0.2082946
       objectReference: {fileID: 0}
     - target: {fileID: 263420438786566225, guid: 24b143f6b932d3241a6559da51aa7980, type: 3}
       propertyPath: m_LocalRotation.x
@@ -616,7 +616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 263420438786566225, guid: 24b143f6b932d3241a6559da51aa7980, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0.97806615
       objectReference: {fileID: 0}
     - target: {fileID: 263420438786566225, guid: 24b143f6b932d3241a6559da51aa7980, type: 3}
       propertyPath: m_LocalRotation.z
@@ -628,7 +628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 263420438786566225, guid: 24b143f6b932d3241a6559da51aa7980, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 155.955
       objectReference: {fileID: 0}
     - target: {fileID: 263420438786566225, guid: 24b143f6b932d3241a6559da51aa7980, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
