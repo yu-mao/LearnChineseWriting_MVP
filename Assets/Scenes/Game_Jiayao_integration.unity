@@ -1344,14 +1344,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: OVRCameraRig_handPoses_00
       objectReference: {fileID: 0}
-    - target: {fileID: 5890614668031845546, guid: 219cc9e31e494420fa2e42745021b12f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6780809674254206715, guid: 219cc9e31e494420fa2e42745021b12f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1916,10 +1908,6 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[5].m_Target
       value: 
       objectReference: {fileID: 1078126942}
-    - target: {fileID: 8441460659034292040, guid: f40e6948818331c458521b74218b03a5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.289
-      objectReference: {fileID: 0}
     - target: {fileID: 8687074134348025437, guid: f40e6948818331c458521b74218b03a5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
