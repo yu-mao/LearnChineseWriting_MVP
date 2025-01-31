@@ -8,9 +8,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Game_interactionFlow.unity
     guid: 98c8bb328ed4148df98e973202fe4bb8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Game.unity
     guid: a770ad32a3e784341ac0ddc7647db1b4
+  - enabled: 0
+    path: Assets/Scenes/Game_IndexFingerWriting.unity
+    guid: d74c0c00dff894a8d90b7837ff25e872
+  - enabled: 1
+    path: Assets/Scenes/Jesus/GameFlow.unity
+    guid: c5c6c596b48472b4483f883d6e7ab692
+  - enabled: 0
+    path: Assets/Scenes/Jesus/GameScene.unity
+    guid: 6ef31f592e71933418583d9c3334a2c0
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 75dcd7fa06e2b4eb2b752e0a13ada358, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

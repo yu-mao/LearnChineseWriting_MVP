@@ -14,7 +14,7 @@ public class ImageComparison : MonoBehaviour
     [SerializeField] private int fixedWidth = 256;
     [SerializeField] private int fixedHeight = 256;
 
-    //[SerializeField] private Califitation califitation;
+    [SerializeField] private TextMeshProUGUI calificationGUI;
 
     [SerializeField, Range(0, 100)] public float thresholdVeryGood;
     [SerializeField, Range(0, 100)] public float thresholdGood;
@@ -26,25 +26,30 @@ public class ImageComparison : MonoBehaviour
         instance = this;
     }
 
-        /*private void Awake()
-        {
-            if (instance != null && instance != this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-        }*/
+    private void Start()
+    {
+        CompareImages();
+    }
 
-        /*private void StartFunction()
+    /*private void Awake()
+    {
+        if (instance != null && instance != this)
         {
-            califitation = CompareImages();
-            calificationGUI.text = califitation.ToString();
-            Debug.Log($"Calificación obtenida: {califitation}");
-        }*/
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }*/
+
+    /*private void StartFunction()
+    {
+        califitation = CompareImages();
+        calificationGUI.text = califitation.ToString();
+        Debug.Log($"Calificación obtenida: {califitation}");
+    }*/
 
     public void SetImageToCompare(Image imagen)
     {
@@ -56,11 +61,13 @@ public class ImageComparison : MonoBehaviour
         rawImage = rawImagen;
     }
 
-    public Califitation CompareImages()
+    public void CompareImages()
     {
         if (image == null || rawImage == null)
         {
-            return Califitation.None;
+            //return Califitation.None;
+            calificationGUI.text = "Error alguna textura es nula";
+            return;
         }
 
         Texture2D texture1;
@@ -75,14 +82,18 @@ public class ImageComparison : MonoBehaviour
         }
         else
         {
-            return Califitation.None;
+            //return Califitation.None;
+            calificationGUI.text = "Error con la textura 1";
+            return;
         }
 
         Texture2D texture2 = image.sprite.texture;
 
         if (!texture1.isReadable || !texture2.isReadable)
         {
-            return Califitation.None;
+            //return Califitation.None;
+            calificationGUI.text = "Error alguna textura no es legible";
+            return;
         }
 
         Texture2D resizedTexture1 = ResizeTexture(texture1, fixedWidth, fixedHeight);
@@ -124,7 +135,8 @@ public class ImageComparison : MonoBehaviour
 
         if (totalRelevantPixels == 0)
         {
-            return Califitation.BAD;
+            //return Califitation.BAD;
+            return;
         }
 
         float percentageCorrect = (correctPixels / (float)totalRelevantPixels) * 100;
@@ -139,11 +151,14 @@ public class ImageComparison : MonoBehaviour
         rawImage = null;
 
         if (percentageSimilarity >= thresholdVeryGood)
-            return Califitation.VERY_GOOD;
+            //return Califitation.VERY_GOOD;
+            calificationGUI.text = Califitation.VERY_GOOD.ToString();
         else if (percentageSimilarity >= thresholdGood)
-            return Califitation.GOOD;
+            //return Califitation.GOOD;
+            calificationGUI.text = Califitation.GOOD.ToString();
         else
-            return Califitation.BAD;
+            //return Califitation.BAD;
+            calificationGUI.text = Califitation.BAD.ToString();
     }
 
     private Texture2D ConvertRenderTextureToTexture2D(RenderTexture renderTexture)

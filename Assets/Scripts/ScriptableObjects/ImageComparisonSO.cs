@@ -7,27 +7,28 @@ using static ImageComparison;
 public class ImageComparisonSO : ScriptableObject
 {
     [SerializeField] private GameObject canvasPrefab;
-    [SerializeField] private Califitation califitation;
+    //[SerializeField] private Califitation califitation;
 
     public void ComparImagesIC()
     {
-        califitation = ImageComparison.instance.CompareImages();
+        //califitation = ImageComparison.instance.CompareImages();
+        ImageComparison.instance.CompareImages();
     }
 
     public void SetImageIC(Image img)
     {
-        ImageComparison.instance.image = img;
+        //ImageComparison.instance.image = img;
     }
 
     public void SetRawImageIC(Transform location)
     {
         GameObject go = Instantiate(canvasPrefab, location.position, Quaternion.identity);
-        ImageComparison.instance.rawImage = go.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<RawImage>();
+        //ImageComparison.instance.rawImage = go.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<RawImage>();
     }
 
-    public Califitation GetCalification()
-    {
-        return califitation;
-    }
+    //public Califitation GetCalification()
+    //{
+    //    return califitation;
+    //}
 
 }

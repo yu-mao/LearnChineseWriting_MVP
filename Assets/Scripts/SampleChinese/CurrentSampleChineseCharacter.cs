@@ -10,8 +10,7 @@ public class CurrentSampleChineseCharacter : MonoBehaviour
 
     public void UpdateCurrentSampleCharacter(string pronounciation)
     {
-        Material currentCharacter = _sampleChineseCharacters.Where(
-            i => i.name.Contains(pronounciation)).FirstOrDefault();
+        Material currentCharacter = _sampleChineseCharacters.Where(i => i.name.Contains(pronounciation)).FirstOrDefault();
         _meshRenderer.material = currentCharacter;
     }
 
